@@ -1,0 +1,2 @@
+0a02580e3e114256765460e6c26da9bb35d0e37386e981ab616335d7be518b24  TodayNote_Windows_v1.1.1.zip
+db5a21fa890af020a3b67d5ae1375fceb850ab201f9d80c56753fc435f85bae9  TodayNote_macOS.zip

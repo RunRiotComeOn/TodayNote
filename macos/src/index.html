@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>今日 · TodayNote</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="note">
+    <header><h1><span class="dot"></span>今日</h1><nav>
+      <button class="icon" id="pin" title="置顶" aria-label="切换置顶"><svg viewBox="0 0 24 24"><path d="m9 3 6 0-1 6 4 4v2H6v-2l4-4-1-6ZM12 15v6"/></svg></button>
+      <button class="icon" id="settings" title="设置" aria-label="设置"><svg viewBox="0 0 24 24"><path d="m9 3-.6 2.2-2 .9-2-.5L2 10l1.6 1.6v1L2 14.2l2.4 4.1 2.1-.5 1.9.9L9 21h6l.6-2.3 1.9-.9 2.1.5 2.4-4.1-1.6-1.6v-1L22 10l-2.4-4.4-2 .5-2-.9L15 3Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+    </nav></header>
+    <div class="meta"><span id="date">正在打开…</span><span id="count"></span></div>
+    <div class="progress"><span id="progress"></span></div>
+    <section class="tasks" id="tasks" aria-label="今天的待办"></section>
+    <div class="empty" id="empty" hidden><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/></svg><p>给今天留一点小目标</p></div>
+    <form class="composer" id="add-form">
+      <div class="composer-line"><input id="new-title" placeholder="添加待办…" aria-label="待办内容" maxlength="500" autocomplete="off"><button class="add icon" type="submit" title="添加 · Enter" aria-label="添加待办"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div>
+      <div class="new-levels"><button type="button" class="badge" id="new-urgency">紧急 · 中 <span>⌄</span></button><button type="button" class="badge" id="new-importance">重要 · 中 <span>⌄</span></button></div>
+    </form>
+    <footer><button id="status" tabindex="-1"></button><button class="undo" id="undo" hidden>撤销</button><button class="icon history" id="history" title="完成记录" aria-label="完成记录"><svg viewBox="0 0 24 24"><path d="M4 8a8 8 0 1 1-1 7M4 3v5h5M12 8v5l3 2"/></svg></button></footer>
+  </main>
+  <div class="veil" id="settings-modal" hidden><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="settings-heading"><div class="sheet-header"><h2 id="settings-heading">设置</h2><button class="close icon" aria-label="关闭设置">×</button></div><div class="sheet-body">
+    <label class="setting">外观<select id="theme"><option value="light">浅色</option><option value="dark">深色</option><option value="system">跟随系统</option></select></label>
+    <label class="setting">窗口置顶<input type="checkbox" id="topmost" class="switch"></label>
+    <label class="setting">开机启动<input type="checkbox" id="startup" class="switch"></label>
+    <label class="setting">按优先级排列<input type="checkbox" id="sort" class="switch"></label>
+    <div class="rule"></div><label class="setting">每天换日时间<input type="time" id="cutoff" required></label>
+    <p class="hint">到点后，未完成的继续保留。<br>完成的收进记录，关机后也会补做换日。</p>
+    <label class="setting">字号<select id="font"><option value="12">小</option><option value="14">标准</option><option value="16">大</option></select></label>
+    <div class="rule"></div><div class="backup-actions"><button id="export">导出备份</button><button id="import">恢复备份</button></div>
+    <div class="sheet-bottom"><span>今日 1.0.0 · macOS<br>本地保存 · 无需联网</span><button id="quit">退出软件</button></div>
+  </div></section></div>
+  <div class="veil" id="edit-modal" hidden><form class="sheet" role="dialog" aria-modal="true" aria-labelledby="edit-heading" id="edit-form"><div class="sheet-header"><h2 id="edit-heading">编辑待办</h2><button type="button" class="close icon" aria-label="取消编辑">×</button></div><div class="sheet-body"><textarea id="edit-title" maxlength="500" aria-label="待办内容" required></textarea><label class="setting">紧急程度<select id="edit-urgency"><option value="1">低</option><option value="2">中</option><option value="3">高</option></select></label><label class="setting">重要程度<select id="edit-importance"><option value="1">低</option><option value="2">中</option><option value="3">高</option></select></label><div class="form-actions"><button class="primary" type="submit">保存</button></div></div></form></div>
+  <div class="veil" id="history-modal" hidden><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="history-heading"><div class="sheet-header"><h2 id="history-heading">完成记录</h2><button class="close icon" aria-label="关闭记录">×</button></div><div class="sheet-body"><select id="history-day" aria-label="选择日期"></select><div id="records"></div></div></section></div>
+  <div class="veil" id="confirm-modal" hidden><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="confirm-heading"><div class="sheet-header"><h2 id="confirm-heading">恢复备份</h2><button class="close icon" aria-label="取消恢复">×</button></div><div class="sheet-body"><p>用这份备份替换当前待办和设置？<br>当前内容会先另存一份，以便恢复。</p><div class="form-actions"><button id="confirm-import">恢复</button></div></div></section></div>
+  <div id="popover" class="popover" hidden></div>
+  <script src="core.js"></script><script src="ui.js"></script>
+</body></html>
