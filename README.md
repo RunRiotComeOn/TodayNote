@@ -8,7 +8,7 @@
 
 [下载 Windows 版](https://github.com/RunRiotComeOn/TodayNote/releases/download/v0.1.0-preview.1/TodayNote_Windows_v1.1.1.zip) · [下载 macOS 版](https://github.com/RunRiotComeOn/TodayNote/releases/download/v0.1.0-preview.1/TodayNote_macOS.zip) · [版本说明](https://github.com/RunRiotComeOn/TodayNote/releases/tag/v0.1.0-preview.1)
 
-<p align="center"><img src="assets/poster-zh.png" alt="今日 TodayNote：今天的事，轻一点。桌面置顶、完成划线、未完延续。" width="660"></p>
+<p align="center"><img src="TodayNote_poster.png" alt="今日 TodayNote：今天的事，轻一点。桌面置顶、完成划线、未完延续。" width="660"></p>
 
 > 当前是首次预览版。核心逻辑和界面交互已做检查，Windows / macOS 的系统功能仍需要更多实机反馈，欢迎通过 Issues 报告问题。
 
